@@ -1,7 +1,10 @@
 # frozen_string_literal: true
-include WebMock
+
 require 'webmock/rspec'
 require 'active_support/all'
+require 'pry'
+require 'json'
+include WebMock
 PROJECT_ROOT = File.expand_path('..', __dir__)
 
 Dir.glob(File.join(PROJECT_ROOT, 'lib', '*.rb')).each do |file|
