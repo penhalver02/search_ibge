@@ -4,7 +4,11 @@ require 'webmock/rspec'
 require 'active_support/all'
 require 'pry'
 require 'json'
-include WebMock
+require 'repositories/ibge'
+require 'faraday'
+require 'entities/statistics_name'
+require 'repositories/uf'
+
 PROJECT_ROOT = File.expand_path('..', __dir__)
 
 Dir.glob(File.join(PROJECT_ROOT, 'lib', '*.rb')).each do |file|

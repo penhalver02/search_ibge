@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-require 'repositories/ibge'
-require 'faraday'
-require 'entities/statistics_name'
-
-describe 'request in ibge' do
+describe 'request all names' do
   it 'request all names' do
     data = [{ "localidade": '33', "sexo": nil, "res": [{ "nome": 'MARIA', "frequencia": 752_021, "ranking": 1 },
                                                        { "nome": 'JOSE', "frequencia": 314_276, "ranking": 2 }] }]
@@ -18,7 +13,9 @@ describe 'request in ibge' do
     expect(ibge[0].name).to include('MARIA')
     expect(ibge[1].name).to include('JOSE')
   end
+end
 
+describe 'request names' do
   it 'request just male names' do
     data = [{ "localidade": '33', "sexo": nil, "res": [{ "nome": 'JOSE', "frequencia": 312_855, "ranking": 1 },
                                                        { "nome": 'JOAO', "frequencia": 207_913, "ranking": 2 }] }]

@@ -14,11 +14,11 @@ module Repositories
       end
     end
 
-    def self.check_city(city)
+    def self.get_city_by_name(city)
       db = SQLite3::Database.open 'db/database.db'
-      city = db.execute("SELECT * FROM Cities WHERE name Like '%#{city}%'")
+      city = db.execute("SELECT * FROM Cities WHERE name='#{city}'")
       db.close
-      city
+      Entities::State.new(city[0][1], city[0][2], city[0][3])
     end
   end
 end

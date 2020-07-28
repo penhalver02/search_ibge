@@ -24,9 +24,17 @@ while opcion != 4
     names = Repositories::Ibge.resque_uf(code, sexo: 'M')
     Presenters::TableCities.new('Tabela de nomes masculinos no Estado', names).printf
     names = Repositories::Ibge.resque_uf(code, sexo: 'F')
-    Presenters::TableCities.new('Tabela de nomes femenina no Estado', names).printf
+    Presenters::TableCities.new('Tabela de nomes femeninos no Estado', names).printf
   elsif opcion == 2
-
+    puts 'Digete a cidade'
+    city = gets.chomp
+    city = Repositories::Uf.get_city_by_name(city)
+    names = Repositories::Ibge.resque_uf(city.code)
+    Presenters::TableCities.new('Tabela de nomes da cidade', names).printf
+    names = Repositories::Ibge.resque_uf(city.code, sexo: 'M')
+    Presenters::TableCities.new('Tabela de nomes masculinos da Cidade', names).printf
+    names = Repositories::Ibge.resque_uf(city.code, sexo: 'F')
+    Presenters::TableCities.new('Tabela de nomes femeninos da Cidade', names).printf
   elsif opcion == 3
 
   elsif opcion == 4

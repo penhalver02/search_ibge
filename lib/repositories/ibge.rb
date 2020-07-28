@@ -5,7 +5,8 @@ module Repositories
   class Ibge
     class << self
       def resque_uf(uf_number, params = {})
-        url = "https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking?localidade=#{uf_number}#{query_string(params)}"
+        query_string = "#{uf_number}#{query_string(params)}"
+        url = "https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking?localidade=#{query_string}"
         response = Faraday.get(url)
         response_parsed = JSON.parse(response.body)
         response_parsed[0]['res'].each_with_object([]) do |q, names|
