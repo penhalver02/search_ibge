@@ -1,7 +1,9 @@
 # frozen_string_literal: true
+
 require 'sqlite3'
 
 module Repositories
+  # get the information in the database
   class Uf
     def self.list
       db = SQLite3::Database.open 'db/database.db'

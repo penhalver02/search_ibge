@@ -1,5 +1,7 @@
 # frozen_string_literal: true
+
 module Presenters
+  # print all opcions
   class Menu
     NAME_IN_UF = 1
     NAME_IN_CITY = 2

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
+
 module Entities
+  # initialize a statistics name entity
   class StatisticsName
     attr_reader :name, :ranking, :frequency
 
