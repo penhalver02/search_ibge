@@ -13,6 +13,12 @@ module Presenters
     def printf
       p title
       print 'Ranking'.center(10), '        Nome'.center(10), "         Frequencia\n"
+      print_names
+    end
+
+    private
+
+    def print_names
       names.each do |name|
         puts "#{name.ranking.to_s.center(10)}  |  #{name.name.center(10)}  |  #{name.frequency.to_s.center(10)}"
       end

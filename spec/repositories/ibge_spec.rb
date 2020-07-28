@@ -20,10 +20,10 @@ describe 'request names' do
     data = [{ "localidade": '33', "sexo": nil, "res": [{ "nome": 'JOSE', "frequencia": 312_855, "ranking": 1 },
                                                        { "nome": 'JOAO', "frequencia": 207_913, "ranking": 2 }] }]
            .to_json
-    url = 'https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking?localidade=33'
+    url = 'https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking?localidade=33&sexo=M'
     stub_request(:get, url).to_return(status: 200, body: data, headers: {})
 
-    ibge = Repositories::Ibge.resque_uf(33)
+    ibge = Repositories::Ibge.resque_uf(33, sexo: 'M')
 
     expect(ibge[0].name).to include('JOSE')
     expect(ibge[1].name).to include('JOAO')
@@ -34,10 +34,10 @@ describe 'request names' do
                                                        { "nome": 'ANA', "frequencia": 296_117, "ranking": 2 }] }]
            .to_json
 
-    url = 'https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking?localidade=33'
+    url = 'https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking?localidade=33&sexo=F'
     stub_request(:get, url).to_return(status: 200, body: data, headers: {})
 
-    ibge = Repositories::Ibge.resque_uf(33)
+    ibge = Repositories::Ibge.resque_uf(33, sexo: 'F')
 
     expect(ibge[0].name).to include('MARIA')
     expect(ibge[1].name).to include('ANA')
