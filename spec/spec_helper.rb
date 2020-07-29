@@ -7,6 +7,7 @@ require 'json'
 require 'repositories/ibge'
 require 'faraday'
 require 'entities/statistics_name'
+require 'entities/frequency_name'
 require 'repositories/uf'
 
 PROJECT_ROOT = File.expand_path('..', __dir__)

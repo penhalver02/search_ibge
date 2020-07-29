@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 
 describe 'request all names' do
   it 'request all names' do
@@ -41,5 +41,23 @@ describe 'request names' do
 
     expect(ibge[0].name).to include('MARIA')
     expect(ibge[1].name).to include('ANA')
+  end
+end
+
+describe 'Get frquency of name in time' do
+  it 'request one name' do
+    data = [{ "nome": 'JOAO', "sexo": nil, "localidade": 'BR', "res": [{ "periodo": '1930[', "frequencia": 60_155 },
+                                                                       { "periodo": '[1930,1940[',
+                                                                         "frequencia": 141_772 }] }]
+           .to_json
+
+    url = 'https://servicodados.ibge.gov.br/api/v2/censos/nomes/joao'
+    stub_request(:get, url).to_return(status: 200, body: data, headers: {})
+
+    ibge = Repositories::Ibge.request_name('joao')
+
+    expect(ibge[0].name).to eq('JOAO')
+    expect(ibge[0].period).to eq('1930[')
+    expect(ibge[0].frequency).to eq(60_155)
   end
 end
