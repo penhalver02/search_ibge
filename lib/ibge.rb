@@ -11,6 +11,7 @@ require_relative 'repositories/uf'
 require_relative 'repositories/ibge'
 require_relative 'presenters/states'
 require_relative 'presenters/table_cities'
+require_relative 'presenters/table_frequency'
 
 Presenters::Menu.new.print
 opcion = gets.to_i
@@ -40,7 +41,8 @@ while opcion != 4
   elsif opcion == 3
     puts 'Digite o nome'
     name = gets.chomp
-    Repositories::Ibge.request_name(name)
+    frequency_of_name = Repositories::Ibge.request_name(name)
+    Presenters::TableFrequency.new('Tabela de frequencia do nome:', frequency_of_name).printf
   elsif opcion == 4
   end
   Presenters::Menu.new.print
