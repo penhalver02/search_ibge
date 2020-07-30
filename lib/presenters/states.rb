@@ -3,16 +3,15 @@
 module Presenters
   # print the list of ufs
   class States
-    attr_reader :states
+    attr_reader :lines
 
-    def initialize(states)
-      @states = states
+    def initialize(lines)
+      @lines = lines
     end
 
-    def print
-      puts 'lista das UFs'
-      states.each do |state|
-        puts "#{state.code} - #{state.name}"
+    def table
+      @table ||= lines.map do |line|
+        "#{line.code} - #{line.name}"
       end
     end
   end

@@ -10,6 +10,7 @@ require 'entities/statistics_name'
 require 'entities/frequency_name'
 require 'entities/city'
 require 'repositories/uf'
+require 'presenters/states'
 
 PROJECT_ROOT = File.expand_path('..', __dir__)
 

@@ -15,6 +15,7 @@ require_relative 'presenters/states'
 require_relative 'presenters/cities'
 require_relative 'presenters/table_cities'
 require_relative 'presenters/table_frequency'
+require_relative 'printer'
 
 Presenters::Menu.new.print
 opcion = gets.to_i
@@ -22,7 +23,8 @@ opcion = gets.to_i
 while opcion != 4
   if opcion == 1
     ufs = Repositories::Uf.list
-    Presenters::States.new(ufs).print
+    ufs_for_print = Presenters::States.new(ufs).table
+    Printer.new(ufs_for_print, 'Lista de Ufs').print
     puts 'Digite o codigo'
     code = gets.to_i
     if Repositories::Uf.check_uf_is_not_valid?(code, 'UF')
