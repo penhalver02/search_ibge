@@ -84,3 +84,17 @@ describe 'Get frequency of more than one name' do
     expect(ibge.second[0].frequency).to eq(336_477)
   end
 end
+
+describe 'handling with string' do
+  it 'handling with two names' do
+    names_for_url = Repositories::Ibge.handling_string('joao, maria')
+
+    expect(names_for_url).to eq('joao%7cmaria')
+  end
+
+  it 'handling with two names' do
+    names_for_url = Repositories::Ibge.handling_string('JOAO, maria')
+
+    expect(names_for_url).to eq('joao%7cmaria')
+  end
+end
