@@ -37,9 +37,9 @@ module Repositories
       end
 
       def handling_string(name)
-        name.gsub!(/[,]/, '|')
-        name.gsub!(/\s+/, '')
-        name = CGI.escape(name).downcase
+        name = name.parameterize
+        name.gsub!(/[-]/, '|')
+        CGI.escape(name).downcase
       end
     end
   end

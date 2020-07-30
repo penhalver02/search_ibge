@@ -97,4 +97,10 @@ describe 'handling with string' do
 
     expect(names_for_url).to eq('joao%7cmaria')
   end
+
+  it 'handling with two names' do
+    names_for_url = Repositories::Ibge.handling_string('João, Sônia, Damião')
+
+    expect(names_for_url).to eq('joao%7csonia%7cdamiao')
+  end
 end

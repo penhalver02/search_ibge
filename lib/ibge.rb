@@ -3,6 +3,7 @@
 require 'faraday'
 require 'json'
 require 'pry'
+require 'active_support/all'
 require_relative 'entities/state'
 require_relative 'entities/city'
 require_relative 'entities/statistics_name'
@@ -57,7 +58,11 @@ while opcion != 4
     puts 'Digite o nome'
     name = gets.chomp
     frequency_of_name = Repositories::Ibge.request_name(name)
-    Presenters::TableFrequency.new('Tabela de frequencia do nome:', frequency_of_name).printf
+    if frequency_of_name.empty?
+      puts 'Nome não encontrado'
+    else
+      Presenters::TableFrequency.new('Tabela de frequencia do nome:', frequency_of_name).printf
+    end
   elsif opcion == 4
   end
   Presenters::Menu.new.print
