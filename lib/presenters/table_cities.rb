@@ -23,12 +23,5 @@ module Presenters
         puts "#{name.ranking.to_s.center(10)}  |  #{name.name.center(10)}  |  #{name.frequency.to_s.center(10)}"
       end
     end
-
-    def print_period
-      puts names.first.name
-      names.each do |name|
-        puts "#{name.period.to_s.center(10)}  |  #{name.frequency.center(10)}  |  #{name.frequency.to_s.center(10)}"
-      end
-    end
   end
 end

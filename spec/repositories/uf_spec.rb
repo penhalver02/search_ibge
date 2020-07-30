@@ -12,21 +12,29 @@ describe 'request in ibge' do
   it 'get the city' do
     city = Repositories::Uf.get_city_by_name('Rio Crespo (RO)')
 
-    expect(city.name).to eq('Rio Crespo (RO)')
-    expect(city.code).to eq(1_100_262)
-    expect(city.population).to eq(3764)
+    expect(city.first.name).to eq('Rio Crespo (RO)')
+    expect(city.first.code).to eq(1_100_262)
+    expect(city.first.population).to eq(3764)
+  end
+
+  it 'get the opcions of cities' do
+    city = Repositories::Uf.get_city_by_name('Cocal')
+
+    expect(city.count).to eq(6)
+    expect(city.first.name).to eq('Cocal (PI)')
+    expect(city.last.name).to eq('Cocalzinho de Goiás (GO)')
   end
 end
 
 describe 'check if uf is valid' do
   it 'it is not valid' do
-    uf = Repositories::Uf.check_uf_is_not_valid?(60)
+    uf = Repositories::Uf.check_uf_is_not_valid?(60, 'MU')
 
     expect(uf).to eq(true)
   end
 
   it 'it is valid' do
-    uf = Repositories::Uf.check_uf_is_not_valid?(33)
+    uf = Repositories::Uf.check_uf_is_not_valid?(2_202_703, 'MU')
 
     expect(uf).to eq(false)
   end
