@@ -56,8 +56,31 @@ describe 'Get frquency of name in time' do
 
     ibge = Repositories::Ibge.request_name('joao')
 
-    expect(ibge[0].name).to eq('JOAO')
-    expect(ibge[0].period).to eq('1930[')
-    expect(ibge[0].frequency).to eq(60_155)
+    expect(ibge.first[0].name).to eq('JOAO')
+    expect(ibge.first[0].period).to eq('1930[')
+    expect(ibge.first[0].frequency).to eq(60_155)
+  end
+end
+describe 'Get frequency of more than one name' do
+  it 'request two or more names' do
+    data = [{ "nome": 'JOAO', "sexo": nil, "localidade": 'BR', "res": [{ "periodo": '1930[', "frequencia": 60_155 },
+                                                                       { "periodo": '[1930,1940[',
+                                                                         "frequencia": 141_772 }] },
+            { "nome": 'MARIA', "sexo": nil, "localidade": 'BR', "res": [{ "periodo": '1930[', "frequencia": 336_477 },
+                                                                        { "periodo": '[1930,1940[',
+                                                                          "frequencia": 749_053 }] }]
+           .to_json
+
+    url = 'https://servicodados.ibge.gov.br/api/v2/censos/nomes/joao%7Cmaria'
+    stub_request(:get, url).to_return(status: 200, body: data, headers: {})
+
+    ibge = Repositories::Ibge.request_name('joao, maria')
+
+    expect(ibge.first[0].name).to eq('JOAO')
+    expect(ibge.first[0].period).to eq('1930[')
+    expect(ibge.first[0].frequency).to eq(60_155)
+    expect(ibge.second[0].name).to eq('MARIA')
+    expect(ibge.second[0].period).to eq('1930[')
+    expect(ibge.second[0].frequency).to eq(336_477)
   end
 end

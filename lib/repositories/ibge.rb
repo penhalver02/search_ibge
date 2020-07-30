@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'cgi'
+require 'i18n'
 module Repositories
   # get the information in the api
   class Ibge
@@ -24,16 +25,23 @@ module Repositories
       end
 
       def request_name(name)
+        treated_name = handling_string(name)
+        url = "https://servicodados.ibge.gov.br/api/v2/censos/nomes/#{treated_name}"
+        response = Faraday.get(url)
+        response_parsed = JSON.parse(response.body)
+        response_parsed.each_with_object([]) do |name_of_person, data|
+          data << name_of_person['res'].map do |q|
+            Entities::FrequencyName.new(name_of_person['nome'], q['periodo'], q['frequencia'])
+          end
+        end
+      end
+
+      private
+
+      def handling_string(name)
         name.gsub!(/[,]/, '|')
         name.gsub!(/\s+/, '')
-        name = CGI.escape(name)
-        url = "https://servicodados.ibge.gov.br/api/v2/censos/nomes/#{name}"
-        response = Faraday.get(url)
-        response_parsed = JSON.parse(response.body).first
-
-        response_parsed['res'].each_with_object([]) do |q, names|
-          names << Entities::FrequencyName.new(response_parsed['nome'], q['periodo'], q['frequencia'])
-        end
+        CGI.escape(name)
       end
     end
   end

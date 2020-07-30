@@ -11,16 +11,18 @@ module Presenters
     end
 
     def printf
-      puts "#{title} #{names[0].name}"
-      print 'periodo'.center(15), "         Frequencia\n"
-      print_period
+      names.each do |name|
+        puts "#{title} #{name[0].name}"
+        print 'periodo'.center(15), "         Frequencia\n"
+        print_period(name)
+      end
     end
 
     private
 
-    def print_period
-      names.each do |name|
-        puts "#{name.period.to_s.center(15)}  |  #{name.frequency.to_s.center(15)}"
+    def print_period(name)
+      name.each do |q|
+        puts "#{q.period.to_s.center(15)}  |  #{q.frequency.to_s.center(15)}"
       end
     end
   end
