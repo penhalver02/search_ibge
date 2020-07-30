@@ -21,13 +21,17 @@ while opcion != 4
     ufs = Repositories::Uf.list
     Presenters::States.new(ufs).print
     puts 'Digite o codigo'
-    code = gets
-    names = Repositories::Ibge.resque_uf(code)
-    Presenters::TableCities.new('Tabela de nomes no Estado', names).printf
-    names = Repositories::Ibge.resque_uf(code, sexo: 'M')
-    Presenters::TableCities.new('Tabela de nomes masculinos no Estado', names).printf
-    names = Repositories::Ibge.resque_uf(code, sexo: 'F')
-    Presenters::TableCities.new('Tabela de nomes femeninos no Estado', names).printf
+    code = gets.to_i
+    if Repositories::Uf.check_uf_is_not_valid?(code)
+      puts 'Digite um codigo valido'
+    else
+      names = Repositories::Ibge.resque_uf(code)
+      Presenters::TableCities.new('Tabela de nomes no Estado', names).printf
+      names = Repositories::Ibge.resque_uf(code, sexo: 'M')
+      Presenters::TableCities.new('Tabela de nomes masculinos no Estado', names).printf
+      names = Repositories::Ibge.resque_uf(code, sexo: 'F')
+      Presenters::TableCities.new('Tabela de nomes femeninos no Estado', names).printf
+    end
   elsif opcion == 2
     puts 'Digite a cidade'
     city = gets.chomp

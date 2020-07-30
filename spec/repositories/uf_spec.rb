@@ -17,3 +17,17 @@ describe 'request in ibge' do
     expect(city.population).to eq(3764)
   end
 end
+
+describe 'check if uf is valid' do
+  it 'it is not valid' do
+    uf = Repositories::Uf.check_uf_is_not_valid?(60)
+
+    expect(uf).to eq(true)
+  end
+
+  it 'it is valid' do
+    uf = Repositories::Uf.check_uf_is_not_valid?(33)
+
+    expect(uf).to eq(false)
+  end
+end
