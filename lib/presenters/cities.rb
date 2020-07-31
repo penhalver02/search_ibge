@@ -3,16 +3,15 @@
 module Presenters
   # print the list of ufs
   class Cities
-    attr_reader :cities
+    attr_reader :lines
 
-    def initialize(cities)
-      @cities = cities
+    def initialize(lines)
+      @lines = lines
     end
 
-    def print
-      puts 'lista das cidades'
-      cities.each do |cities|
-        puts "#{cities.code} - #{cities.name}"
+    def table
+      lines.map do |line|
+        "#{line.code} - #{line.name}"
       end
     end
   end

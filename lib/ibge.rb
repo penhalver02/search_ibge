@@ -44,7 +44,8 @@ while opcion != 4
     puts 'Digite a cidade'
     city = gets.chomp
     city = Repositories::Uf.get_city_by_name(city)
-    Presenters::Cities.new(city).print
+    city_for_print = Presenters::Cities.new(city).table
+    Printer.new(city_for_print, 'Cidades encontradas').print
     puts 'Confirme a cidade digitando o codigo:'
     confirm_city = gets.to_i
 
@@ -52,11 +53,14 @@ while opcion != 4
       puts 'Digite um codigo valido'
     else
       names = Repositories::Ibge.resque_uf(confirm_city)
-      Presenters::TableCities.new('Tabela de nomes da cidade', names).printf
+      names_for_print = Presenters::TableCities.new(names).table
+      Printer.new(names_for_print, 'Tabela de nomes na Cidade').print
       names = Repositories::Ibge.resque_uf(confirm_city, sexo: 'M')
-      Presenters::TableCities.new('Tabela de nomes masculinos da Cidade', names).printf
+      names_for_print = Presenters::TableCities.new(names).table
+      Printer.new(names_for_print, 'Tabela de nomes masculinos na Cidade').print
       names = Repositories::Ibge.resque_uf(confirm_city, sexo: 'F')
-      Presenters::TableCities.new('Tabela de nomes femeninos da Cidade', names).printf
+      names_for_print = Presenters::TableCities.new(names).table
+      Printer.new(names_for_print, 'Tabela de nomes femeninos na Cidade').print
     end
 
   elsif opcion == 3
