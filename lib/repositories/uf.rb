@@ -17,7 +17,7 @@ module Repositories
 
       def get_city_by_name(check_city)
         db = SQLite3::Database.open 'db/database.db'
-        cities = db.execute("SELECT * FROM Cities WHERE name LIKE '%#{check_city}%' AND level='MU'")
+        cities = db.execute("SELECT * FROM Cities WHERE name LIKE ? AND level='MU'", ["%#{check_city}%"])
         db.close
 
         cities.map do |city|
@@ -25,15 +25,9 @@ module Repositories
         end
       end
 
-      def get_city_by_code(code)
-        db = SQLite3::Database.open 'db/database.db'
-        city = db.execute("SELECT * FROM Cities WHERE code='#{code}' AND level='MU'")
-        Entities::State.new(city[0][1], city[0][2], city[0][3])
-      end
-
       def check_uf_is_not_valid?(data, level)
         db = SQLite3::Database.open 'db/database.db'
-        checked_uf = db.execute("SELECT * FROM Cities WHERE code='#{data}' AND level='#{level}'")
+        checked_uf = db.execute('SELECT * FROM Cities WHERE code=? AND level=?', [data, level])
         db.close
         checked_uf.empty?
       end
