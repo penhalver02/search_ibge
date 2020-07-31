@@ -9,11 +9,11 @@ module Presenters
     QUIT = 4
 
     def print
-      p "#{NAME_IN_UF} para fereficar nome por UF"
-      p "#{NAME_IN_CITY} para verificar nome por city"
-      p "#{NAME_IN_THE_TIME} para vereficar nome durante o tempo"
-      p "#{QUIT} para sair"
-      p 'Digite uma das opcoes'
+      ["#{NAME_IN_UF} para fereficar nome por UF",
+       "#{NAME_IN_CITY} para verificar nome por city",
+       "#{NAME_IN_THE_TIME} para vereficar nome durante o tempo",
+       "#{QUIT} para sair",
+       'Digite uma das opcoes']
     end
   end
 end

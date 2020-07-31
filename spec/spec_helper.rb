@@ -13,6 +13,7 @@ require 'repositories/uf'
 require 'presenters/states'
 require 'presenters/table_cities'
 require 'presenters/table_frequency'
+require 'presenters/menu'
 
 PROJECT_ROOT = File.expand_path('..', __dir__)
 

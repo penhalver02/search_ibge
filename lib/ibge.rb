@@ -17,7 +17,8 @@ require_relative 'presenters/table_cities'
 require_relative 'presenters/table_frequency'
 require_relative 'printer'
 
-Presenters::Menu.new.print
+menu_for_print = Presenters::Menu.new.print
+Printer.new(menu_for_print, 'Menu').print
 opcion = gets.to_i
 
 while opcion != 4
@@ -75,6 +76,7 @@ while opcion != 4
     end
   elsif opcion == 4
   end
-  Presenters::Menu.new.print
+  menu_for_print = Presenters::Menu.new.print
+  Printer.new(menu_for_print, 'Menu').print
   opcion = gets.to_i
 end
