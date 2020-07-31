@@ -70,7 +70,8 @@ while opcion != 4
     if frequency_of_name.empty?
       puts 'Nome não encontrado'
     else
-      Presenters::TableFrequency.new('Tabela de frequencia do nome:', frequency_of_name).printf
+      names_for_print = Presenters::TableFrequency.new(frequency_of_name).table
+      Printer.new(names_for_print, 'Tabela de frequencia ').print
     end
   elsif opcion == 4
   end
