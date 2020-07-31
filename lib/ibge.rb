@@ -17,13 +17,14 @@ require_relative 'presenters/cities'
 require_relative 'presenters/table_cities'
 require_relative 'presenters/table_frequency'
 require_relative 'printer'
+require_relative 'available_services'
 
-presenter = Presenters::Menu.new
+presenter = Presenters::Menu.new(AvailableServices, 'Menu')
 Printer.new(presenter).print
 opcion = gets.to_i
 
-while opcion != 4
-  if opcion == 1
+while opcion != AvailableServices::QUIT
+  if opcion == AvailableServices::NAME_IN_UF
     ufs = Repositories::Uf.list
     presenter = Presenters::States.new(ufs, 'Lista de Ufs')
     Printer.new(presenter).print
@@ -42,7 +43,7 @@ while opcion != 4
       presenter = Presenters::TableCities.new(names, 'Tabela de nomes femeninos no Estado')
       Printer.new(presenter).print
     end
-  elsif opcion == 2
+  elsif opcion == AvailableServices::NAME_IN_CITY
     puts 'Digite a cidade'
     city = gets.chomp
     city = Repositories::Uf.get_city_by_name(city)
@@ -65,7 +66,7 @@ while opcion != 4
       Printer.new(presenter).print
     end
 
-  elsif opcion == 3
+  elsif opcion == AvailableServices::NAME_IN_THE_TIME
     puts 'Digite o nome'
     name = gets.chomp
     frequency_of_name = Repositories::Ibge.request_name(name)
@@ -75,9 +76,9 @@ while opcion != 4
       presenter = Presenters::TableFrequency.new(frequency_of_name, 'Tabela de frequencia ')
       Printer.new(presenter).print
     end
-  elsif opcion == 4
+  elsif opcion == AvailableServices::QUIT
   end
-  presenter = Presenters::Menu.new
+  presenter = Presenters::Menu.new(AvailableServices, 'Menu')
   Printer.new(presenter).print
   opcion = gets.to_i
 end

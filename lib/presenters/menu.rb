@@ -3,17 +3,18 @@
 module Presenters
   # print all opcions
   class Menu
-    attr_reader :title
-    NAME_IN_UF = 1
-    NAME_IN_CITY = 2
-    NAME_IN_THE_TIME = 3
-    QUIT = 4
+    attr_reader :title, :services
+
+    def initialize(services, title)
+      @services = services
+      @title = title
+    end
 
     def table
-      ["#{NAME_IN_UF} para fereficar nome por UF",
-       "#{NAME_IN_CITY} para verificar nome por city",
-       "#{NAME_IN_THE_TIME} para vereficar nome durante o tempo",
-       "#{QUIT} para sair",
+      ["#{services::NAME_IN_UF} para fereficar nome por UF",
+       "#{services::NAME_IN_CITY} para verificar nome por city",
+       "#{services::NAME_IN_THE_TIME} para vereficar nome durante o tempo",
+       "#{services::QUIT} para sair",
        'Digite uma das opcoes']
     end
   end
