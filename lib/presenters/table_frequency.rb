@@ -3,15 +3,16 @@
 module Presenters
   # print a table with names
   class TableFrequency
-    attr_reader :names
+    attr_reader :names, :title
 
-    def initialize(names)
+    def initialize(names, title)
       @names = names
+      @title = title
     end
 
     def table
       names.map do |name|
-        table = [name.first.name.to_s, "    periodo           Frequencia\n"]
+        table = [name.first.name, "    periodo           Frequencia\n"]
         table << print_period(name)
       end
     end

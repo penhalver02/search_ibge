@@ -18,36 +18,36 @@ require_relative 'presenters/table_cities'
 require_relative 'presenters/table_frequency'
 require_relative 'printer'
 
-menu_for_print = Presenters::Menu.new.print
-Printer.new(menu_for_print, 'Menu').print
+presenter = Presenters::Menu.new
+Printer.new(presenter).print
 opcion = gets.to_i
 
 while opcion != 4
   if opcion == 1
     ufs = Repositories::Uf.list
-    ufs_for_print = Presenters::States.new(ufs).table
-    Printer.new(ufs_for_print, 'Lista de Ufs').print
+    presenter = Presenters::States.new(ufs, 'Lista de Ufs')
+    Printer.new(presenter).print
     puts 'Digite o codigo'
     code = gets.to_i
     if Repositories::Uf.check_uf_is_not_valid?(code, 'UF')
       puts 'Digite um codigo valido'
     else
       names = Repositories::Ibge.resque_uf(code)
-      names_for_print = Presenters::TableCities.new(names).table
-      Printer.new(names_for_print, 'Tabela de nomes no Estado').print
+      presenter = Presenters::TableCities.new(names, 'Tabela de nomes no Estado')
+      Printer.new(presenter).print
       names = Repositories::Ibge.resque_uf(code, sexo: 'M')
-      names_for_print = Presenters::TableCities.new(names).table
-      Printer.new(names_for_print, 'Tabela de nomes masculinos no Estado').print
+      presenter = Presenters::TableCities.new(names, 'Tabela de nomes masculinos no Estado')
+      Printer.new(presenter).print
       names = Repositories::Ibge.resque_uf(code, sexo: 'F')
-      names_for_print = Presenters::TableCities.new(names).table
-      Printer.new(names_for_print, 'Tabela de nomes femeninos no Estado').print
+      presenter = Presenters::TableCities.new(names, 'Tabela de nomes femeninos no Estado')
+      Printer.new(presenter).print
     end
   elsif opcion == 2
     puts 'Digite a cidade'
     city = gets.chomp
     city = Repositories::Uf.get_city_by_name(city)
-    city_for_print = Presenters::Cities.new(city).table
-    Printer.new(city_for_print, 'Cidades encontradas').print
+    presenter = Presenters::Cities.new(city, 'Cidades encontradas')
+    Printer.new(presenter).print
     puts 'Confirme a cidade digitando o codigo:'
     confirm_city = gets.to_i
 
@@ -55,14 +55,14 @@ while opcion != 4
       puts 'Digite um codigo valido'
     else
       names = Repositories::Ibge.resque_uf(confirm_city)
-      names_for_print = Presenters::TableCities.new(names).table
-      Printer.new(names_for_print, 'Tabela de nomes na Cidade').print
+      presenter = Presenters::TableCities.new(names, 'Tabela de nomes na Cidade')
+      Printer.new(presenter).print
       names = Repositories::Ibge.resque_uf(confirm_city, sexo: 'M')
-      names_for_print = Presenters::TableCities.new(names).table
-      Printer.new(names_for_print, 'Tabela de nomes masculinos na Cidade').print
+      presenter = Presenters::TableCities.new(names, 'Tabela de nomes masculinos na Cidade')
+      Printer.new(presenter).print
       names = Repositories::Ibge.resque_uf(confirm_city, sexo: 'F')
-      names_for_print = Presenters::TableCities.new(names).table
-      Printer.new(names_for_print, 'Tabela de nomes femeninos na Cidade').print
+      presenter = Presenters::TableCities.new(names, 'Tabela de nomes femeninos na Cidade')
+      Printer.new(presenter).print
     end
 
   elsif opcion == 3
@@ -72,12 +72,12 @@ while opcion != 4
     if frequency_of_name.empty?
       puts 'Nome não encontrado'
     else
-      names_for_print = Presenters::TableFrequency.new(frequency_of_name).table
-      Printer.new(names_for_print, 'Tabela de frequencia ').print
+      presenter = Presenters::TableFrequency.new(frequency_of_name, 'Tabela de frequencia ')
+      Printer.new(presenter).print
     end
   elsif opcion == 4
   end
-  menu_for_print = Presenters::Menu.new.print
-  Printer.new(menu_for_print, 'Menu').print
+  presenter = Presenters::Menu.new
+  Printer.new(presenter).print
   opcion = gets.to_i
 end

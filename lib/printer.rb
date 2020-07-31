@@ -2,16 +2,15 @@
 
 # print the list of ufs
 class Printer
-  attr_reader :data, :title
+  attr_reader :presenter
 
-  def initialize(data, title)
-    @data = data
-    @title = title
+  def initialize(presenter)
+    @presenter = presenter
   end
 
   def print
-    puts title
-    data.each do |row|
+    puts presenter.title
+    presenter.table.each do |row|
       puts row
       puts '------------------------------------------'
     end

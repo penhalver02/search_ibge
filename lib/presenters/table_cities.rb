@@ -3,10 +3,11 @@
 module Presenters
   # print a table with names
   class TableCities
-    attr_reader :lines
+    attr_reader :lines, :title
 
-    def initialize(lines)
+    def initialize(lines, title)
       @lines = lines
+      @title = title
     end
 
     def table

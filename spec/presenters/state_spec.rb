@@ -8,9 +8,10 @@ describe 'states' do
     uf_two = Entities::State.new(12, 'Acre', 881_935)
 
     ufs = [uf_one, uf_two]
-    statistics_name = Presenters::States.new(ufs)
+    statistics_name = Presenters::States.new(ufs, 'titulo')
 
     expect(statistics_name.table.first).to eq '11 - Rondônia'
     expect(statistics_name.table.second).to eq '12 - Acre'
+    expect(statistics_name.title).to eq 'titulo'
   end
 end

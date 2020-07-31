@@ -9,10 +9,11 @@ describe 'Table cities' do
 
     data = [data_one, data_two]
 
-    statistics_name = Presenters::TableCities.new(data).table
+    statistics_name = Presenters::TableCities.new(data, 'titulo')
 
-    expect(statistics_name.first).to eq 'Ranking          Nome         Frequencia'
-    expect(statistics_name[1]).to eq '    1       |    MARIA     |    752021  '
-    expect(statistics_name[2]).to eq '    2       |     JOSE     |    314276  '
+    expect(statistics_name.table.first).to eq 'Ranking          Nome         Frequencia'
+    expect(statistics_name.table[1]).to eq '    1       |    MARIA     |    752021  '
+    expect(statistics_name.table[2]).to eq '    2       |     JOSE     |    314276  '
+    expect(statistics_name.title).to eq 'titulo'
   end
 end

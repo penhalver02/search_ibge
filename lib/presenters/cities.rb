@@ -3,10 +3,11 @@
 module Presenters
   # print the list of ufs
   class Cities
-    attr_reader :lines
+    attr_reader :lines, :title
 
-    def initialize(lines)
+    def initialize(lines, title)
       @lines = lines
+      @title = title
     end
 
     def table

@@ -7,8 +7,9 @@ describe 'cities' do
     uf_one = Entities::City.new(3_304_557, 'Rio de Janeiro (RJ)', 6_718_903)
 
     ufs = [uf_one]
-    statistics_name = Presenters::States.new(ufs).table
+    statistics_name = Presenters::States.new(ufs, 'Titulo')
 
-    expect(statistics_name.first).to eq '3304557 - Rio de Janeiro (RJ)'
+    expect(statistics_name.table.first).to eq '3304557 - Rio de Janeiro (RJ)'
+    expect(statistics_name.title).to eq 'Titulo'
   end
 end

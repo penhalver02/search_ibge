@@ -3,12 +3,13 @@
 module Presenters
   # print all opcions
   class Menu
+    attr_reader :title
     NAME_IN_UF = 1
     NAME_IN_CITY = 2
     NAME_IN_THE_TIME = 3
     QUIT = 4
 
-    def print
+    def table
       ["#{NAME_IN_UF} para fereficar nome por UF",
        "#{NAME_IN_CITY} para verificar nome por city",
        "#{NAME_IN_THE_TIME} para vereficar nome durante o tempo",

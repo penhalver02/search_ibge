@@ -11,15 +11,16 @@ describe 'Table cities' do
 
     data = [[joao_one, joao_two], [maria_one, maria_two]]
 
-    statistics_name = Presenters::TableFrequency.new(data).table
+    statistics_name = Presenters::TableFrequency.new(data, 'titulo')
 
-    expect(statistics_name.first[0]).to eq 'JOAO'
-    expect(statistics_name.first[1]).to eq "    periodo           Frequencia\n"
-    expect(statistics_name.first[2][0]).to eq '     1930[       |       60155     '
-    expect(statistics_name.first[2][1]).to eq '  [1930,1940[    |      141772     '
-    expect(statistics_name.last[0]).to eq 'MARIA'
-    expect(statistics_name.last[1]).to eq "    periodo           Frequencia\n"
-    expect(statistics_name.last[2][0]).to eq '     1930[       |      336477     '
-    expect(statistics_name.last[2][1]).to eq '  [1930,1940[    |      749053     '
+    expect(statistics_name.table.first[0]).to eq 'JOAO'
+    expect(statistics_name.table.first[1]).to eq "    periodo           Frequencia\n"
+    expect(statistics_name.table.first[2][0]).to eq '     1930[       |       60155     '
+    expect(statistics_name.table.first[2][1]).to eq '  [1930,1940[    |      141772     '
+    expect(statistics_name.table.last[0]).to eq 'MARIA'
+    expect(statistics_name.table.last[1]).to eq "    periodo           Frequencia\n"
+    expect(statistics_name.table.last[2][0]).to eq '     1930[       |      336477     '
+    expect(statistics_name.table.last[2][1]).to eq '  [1930,1940[    |      749053     '
+    expect(statistics_name.title).to eq 'titulo'
   end
 end
