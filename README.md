@@ -9,11 +9,19 @@
 - Ruby 2.7.0
 ## Começando 
 
-Para começar devemos fazer um  [ clone do projeto ](https://github.com/penhalver02/search_ibge), e em seguida mudar para a pasta do projeto e rodar o comando:
+Para começar devemos fazer um clone do projeto:
+ ```
+    https://github.com/penhalver02/search_ibge.git
+```
+em seguida mudar para a pasta:
+ ```
+    cd search_ibge
+```
+e por ultimo rodar o comando:
  ```
     bin/setup
 ```
-que instalara as dependências e criar o banco de dados o que pode levar alguns minutos, para inicializar o sistema devemos rodar o comando:
+que instalara as dependências e criar o banco de dados o que pode levarde 10 a 15 min , para inicializar o sistema devemos rodar o comando:
 ```
     ruby lib/ibge.rb
 ```
