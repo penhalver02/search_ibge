@@ -3,25 +3,18 @@
 module Presenters
   # print a table with names
   class TableCities
-    attr_reader :title, :names
+    attr_reader :lines
 
-    def initialize(title, names)
-      @title = title
-      @names = names
+    def initialize(lines)
+      @lines = lines
     end
 
-    def printf
-      puts title
-      print 'Ranking'.center(10), '        Nome'.center(10), "         Frequencia\n"
-      print_names
-    end
-
-    private
-
-    def print_names
-      names.each do |name|
-        puts "#{name.ranking.to_s.center(10)}  |  #{name.name.center(10)}  |  #{name.frequency.to_s.center(10)}"
+    def table
+      table = ['Ranking          Nome         Frequencia']
+      lines.each do |line|
+        table << "#{line.ranking.to_s.center(10)}  |  #{line.name.center(10)}  |  #{line.frequency.to_s.center(10)}"
       end
+      table
     end
   end
 end

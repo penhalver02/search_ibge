@@ -31,11 +31,14 @@ while opcion != 4
       puts 'Digite um codigo valido'
     else
       names = Repositories::Ibge.resque_uf(code)
-      Presenters::TableCities.new('Tabela de nomes no Estado', names).printf
+      names_for_print = Presenters::TableCities.new(names).table
+      Printer.new(names_for_print, 'Tabela de nomes no Estado').print
       names = Repositories::Ibge.resque_uf(code, sexo: 'M')
-      Presenters::TableCities.new('Tabela de nomes masculinos no Estado', names).printf
+      names_for_print = Presenters::TableCities.new(names).table
+      Printer.new(names_for_print, 'Tabela de nomes masculinos no Estado').print
       names = Repositories::Ibge.resque_uf(code, sexo: 'F')
-      Presenters::TableCities.new('Tabela de nomes femeninos no Estado', names).printf
+      names_for_print = Presenters::TableCities.new(names).table
+      Printer.new(names_for_print, 'Tabela de nomes femeninos no Estado').print
     end
   elsif opcion == 2
     puts 'Digite a cidade'

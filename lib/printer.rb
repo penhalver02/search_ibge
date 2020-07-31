@@ -13,6 +13,7 @@ class Printer
     puts title
     data.each do |row|
       puts row
+      puts '------------------------------------------'
     end
   end
 end
