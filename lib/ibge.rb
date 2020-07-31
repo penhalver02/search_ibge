@@ -3,6 +3,7 @@
 require 'faraday'
 require 'json'
 require 'pry'
+require 'sqlite3'
 require 'active_support/all'
 require_relative 'entities/state'
 require_relative 'entities/city'
