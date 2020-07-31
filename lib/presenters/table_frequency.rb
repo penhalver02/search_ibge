@@ -11,7 +11,7 @@ module Presenters
 
     def table
       names.map do |name|
-        table = ["    periodo           Frequencia\n"]
+        table = [name.first.name.to_s, "    periodo           Frequencia\n"]
         table << print_period(name)
       end
     end

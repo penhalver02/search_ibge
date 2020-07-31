@@ -13,11 +13,13 @@ describe 'Table cities' do
 
     statistics_name = Presenters::TableFrequency.new(data).table
 
-    expect(statistics_name.first[0]).to eq "    periodo           Frequencia\n"
-    expect(statistics_name.first[1][0]).to eq '     1930[       |       60155     '
-    expect(statistics_name.first[1][1]).to eq '  [1930,1940[    |      141772     '
-    expect(statistics_name.last[0]).to eq "    periodo           Frequencia\n"
-    expect(statistics_name.last[1][0]).to eq '     1930[       |      336477     '
-    expect(statistics_name.last[1][1]).to eq '  [1930,1940[    |      749053     '
+    expect(statistics_name.first[0]).to eq 'JOAO'
+    expect(statistics_name.first[1]).to eq "    periodo           Frequencia\n"
+    expect(statistics_name.first[2][0]).to eq '     1930[       |       60155     '
+    expect(statistics_name.first[2][1]).to eq '  [1930,1940[    |      141772     '
+    expect(statistics_name.last[0]).to eq 'MARIA'
+    expect(statistics_name.last[1]).to eq "    periodo           Frequencia\n"
+    expect(statistics_name.last[2][0]).to eq '     1930[       |      336477     '
+    expect(statistics_name.last[2][1]).to eq '  [1930,1940[    |      749053     '
   end
 end
