@@ -28,13 +28,27 @@ end
 
 describe 'check if uf is valid' do
   it 'it is not valid' do
-    uf = Repositories::Uf.check_uf_is_not_valid?(60, 'MU')
+    uf = Repositories::Uf.check_uf_is_not_valid?(60)
 
     expect(uf).to eq(true)
   end
 
   it 'it is valid' do
-    uf = Repositories::Uf.check_uf_is_not_valid?(2_202_703, 'MU')
+    uf = Repositories::Uf.check_uf_is_not_valid?(33)
+
+    expect(uf).to eq(false)
+  end
+end
+
+describe 'check if uf is valid' do
+  it 'it is not valid' do
+    uf = Repositories::Uf.check_city_is_not_valid?(111_111)
+
+    expect(uf).to eq(true)
+  end
+
+  it 'it is valid' do
+    uf = Repositories::Uf.check_city_is_not_valid?(3_304_557)
 
     expect(uf).to eq(false)
   end

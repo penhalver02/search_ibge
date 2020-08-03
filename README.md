@@ -47,5 +47,4 @@ Para rodar os testes, utilize o comando abaixo:
 ## TODO
 
 - teste de sistema
-- separar cidades e estados em tabelas de diferentes
 

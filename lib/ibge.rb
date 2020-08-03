@@ -30,7 +30,7 @@ while opcion != AvailableServices::QUIT
     Printer.new(presenter).print
     puts 'Digite o codigo'
     code = gets.to_i
-    if Repositories::Uf.check_uf_is_not_valid?(code, 'UF')
+    if Repositories::Uf.check_uf_is_not_valid?(code)
       puts 'Digite um codigo valido'
     else
       names = Repositories::Ibge.resque_uf(code)
@@ -52,7 +52,7 @@ while opcion != AvailableServices::QUIT
     puts 'Confirme a cidade digitando o codigo:'
     confirm_city = gets.to_i
 
-    if Repositories::Uf.check_uf_is_not_valid?(confirm_city, 'MU')
+    if Repositories::Uf.check_city_is_not_valid?(confirm_city)
       puts 'Digite um codigo valido'
     else
       names = Repositories::Ibge.resque_uf(confirm_city)

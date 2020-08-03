@@ -20,9 +20,21 @@ begin
       population int
     );
   SQL
+  db.execute <<-SQL
+    CREATE TABLE States(
+      level varchar(40),
+      code int,
+      name varchar(255),
+      population int
+    );
+  SQL
   text = File.read(Dir.pwd + '/data/populacao_2019.csv')
   CSV.parse(text, headers: true) do |row|
-    db.execute 'INSERT INTO Cities VALUES ( ?, ?, ?, ? )', row.fields
+    if row[0].include?('UF')
+      db.execute 'INSERT INTO States VALUES ( ?, ?, ?, ? )', row.fields
+    else
+      db.execute 'INSERT INTO Cities VALUES ( ?, ?, ?, ? )', row.fields
+    end
   end
 rescue SQLite3::Exception => e
   puts e
