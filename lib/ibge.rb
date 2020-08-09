@@ -18,6 +18,7 @@ require_relative 'presenters/table_cities'
 require_relative 'presenters/table_frequency'
 require_relative 'printer'
 require_relative 'available_services'
+require_relative 'services/name_uf'
 
 presenter = Presenters::Menu.new(AvailableServices, 'Menu')
 Printer.new(presenter).print
@@ -25,24 +26,10 @@ opcion = gets.to_i
 
 while opcion != AvailableServices::QUIT
   if opcion == AvailableServices::NAME_IN_UF
-    ufs = Repositories::Uf.list
-    presenter = Presenters::States.new(ufs, 'Lista de Ufs')
-    Printer.new(presenter).print
+    Services::NameUf.list_uf
     puts 'Digite o codigo'
     code = gets.to_i
-    if Repositories::Uf.check_uf_is_not_valid?(code)
-      puts 'Digite um codigo valido'
-    else
-      names = Repositories::Ibge.resque_uf(code)
-      presenter = Presenters::TableCities.new(names, 'Tabela de nomes no Estado')
-      Printer.new(presenter).print
-      names = Repositories::Ibge.resque_uf(code, sexo: 'M')
-      presenter = Presenters::TableCities.new(names, 'Tabela de nomes masculinos no Estado')
-      Printer.new(presenter).print
-      names = Repositories::Ibge.resque_uf(code, sexo: 'F')
-      presenter = Presenters::TableCities.new(names, 'Tabela de nomes femeninos no Estado')
-      Printer.new(presenter).print
-    end
+    Services::NameUf.get_uf(code)
   elsif opcion == AvailableServices::NAME_IN_CITY
     puts 'Digite a cidade'
     city = gets.chomp
