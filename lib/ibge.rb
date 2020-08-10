@@ -20,6 +20,7 @@ require_relative 'printer'
 require_relative 'available_services'
 require_relative 'services/name_uf'
 require_relative 'services/name_city'
+require_relative 'services/name_in_the_time'
 
 presenter = Presenters::Menu.new(AvailableServices, 'Menu')
 Printer.new(presenter).print
@@ -41,13 +42,7 @@ while opcion != AvailableServices::QUIT
   elsif opcion == AvailableServices::NAME_IN_THE_TIME
     puts 'Digite o nome'
     name = gets.chomp
-    frequency_of_name = Repositories::Ibge.request_name(name)
-    if frequency_of_name.empty?
-      puts 'Nome não encontrado'
-    else
-      presenter = Presenters::TableFrequency.new(frequency_of_name, 'Tabela de frequencia ')
-      Printer.new(presenter).print
-    end
+    Services::NameIntheTime.get_name_in_the_time(name)
   elsif opcion == AvailableServices::QUIT
   end
   presenter = Presenters::Menu.new(AvailableServices, 'Menu')
